@@ -85,7 +85,6 @@ public class IveGotWoodPlugin extends Plugin
 	protected void startUp() throws Exception {
 		log.info("Ive got wood started!");
 		initialized = false;
-		isXPUploaded = false;
 		updateSkills();
 	}
 
@@ -105,17 +104,13 @@ public class IveGotWoodPlugin extends Plugin
 			oldXP.clear();
 			newXP.clear();
 			initialized = false;
-			isXPUploaded = false;
 		}
 	}
 
 	@Subscribe
 	public void onGameTick(GameTick event) {
-		if (!isXPUploaded) {
-			for (Skills skill : Skills.values()) {
-				oldXP.put(skill.skill, client.getSkillExperience(skill.skill));
-			}
-			isXPUploaded = true;
+		for (Skills skill : Skills.values()) {
+			oldXP.put(skill.skill, client.getSkillExperience(skill.skill));
 		}
 	}
 	@Subscribe
